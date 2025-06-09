@@ -1,14 +1,18 @@
 const express = require('express');
 const { connection } = require('./postgres/postgres');
-// const userRoutes = require('./routes/userRoutes'); 
 const { router } = require('./view/routes');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+app.use(cookieParser())
+app.use(express.urlencoded({ extended: true })); 
 
-app.use(router); 
+app.use("/api", router);
+
+
 
 (async () => {
   await connection();

@@ -25,7 +25,7 @@ const createUserLoginModal = async (sequelize) => {
       },
      refreshtoken:{
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
         unique: true,
      },
     });

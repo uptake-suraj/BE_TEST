@@ -15,7 +15,7 @@ const connection = async () => {
     await sequelize.authenticate();
     console.log('Database connected successfully');
     
-    const UserLoginModal = await  createUserLoginModal(sequelize)
+    UserLoginModal = await  createUserLoginModal(sequelize)
     UserModal = await createUserModal(sequelize);
     await UserLoginModal.sync({alter:true});
     await sequelize.sync();
@@ -32,8 +32,16 @@ const getUserModal = () => {
   return UserModal;
 };
 
+const getLoginUserModal = () => {
+  if (!UserLoginModal) {
+    throw new Error('UserModal not initialized. Call connection() first.');
+  }
+  return UserLoginModal;
+};
+
 module.exports = {
   connection,
   getUserModal,
-  UserLoginModal
+  UserLoginModal,
+  getLoginUserModal
 };
